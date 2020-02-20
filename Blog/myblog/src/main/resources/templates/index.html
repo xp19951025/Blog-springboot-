@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>个人博客</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <nav>
+    <ul>
+      <li><a href="/index">网站首页</a></li>
+      <#list (catelist)! as catelist>
+      <li><a href="/listcat?page=1&categoryId=${(catelist.categoryId)!}&categoryName=${(catelist.categoryName)!}">${(catelist.categoryName)!}</a></li>
+      </#list>
+      <li><a href="/loadmeassage">留言</a></li>
+    </ul>
+  </nav>
+</header>
+<article>
+  <div class="pics">
+    <ul>
+      <li><img src="front/picture/42d76eafa6495d9647a4fd245201f56c.jpg"></li>
+      <li><img src="front/picture/c9668d65657bc41b77f6834984538979.jpg"></li>
+      <li><img src="front/picture/13ec5c876bf437fd7e9e6b12b565a69c.jpg"></li>
+    </ul>
+  </div>
+  <div class="sleftbox">
+    <div class="newblogs">
+      <h2 class="hometitle">最新文章</h2>
+      <ul>
+      	<#list (newArticleList)! as newart> 
+        <li>
+          <h3 class="blogtitle"><a href="/listView/${(newart.articleId)!}" target="_blank" >${(newart.articleTitle)!}</a></h3>
+          <div class="bloginfo"><span class="blogpic"><a href="/listView/${(newart.articleId)!}" title="别让这些闹心的套路，毁了你的网页设计" target="_blank"><img src="${(newart.articleImg)!}" alt="别让这些闹心的套路，毁了你的网页设计" /></a></span>
+            <p>
+            <#if newart.articleContent?length gt 200>
+            	${newart.articleContent?substring(0,100)}
+            	<#else>
+            		${(newart.articleContent)!}
+            </#if>
+            </p>
+          </div>
+          <div class="autor"><span class="lm f_l"><a href="/listcat?page=1&categoryId=${(newart.categoryId)!}&categoryName=${(newart.categoryName)!}" title="css3" target="_blank"  class="classname">${(newart.categoryName)!}</a></span><span class="dtime f_l">${(newart.articleTime?string('yyyy-MM-dd'))!}</span></span><span class="f_r"><a href="/listView/${(newart.articleId)!}" class="more" target="_blank" >阅读原文>></a></span></div>
+        </li>
+		</#list>
+      </ul>
+    </div>
+  </div>
+  <div class="srightbox">
+    <div class="aboutme">
+      <h2 class="ab_title">关于我</h2>
+      <div class="avatar"><img src="front/picture/b05.jpg" /></div>
+      <div class="ab_con">
+        <p>网名：枫殇残雪</p>
+        <p>职业：Java程序猿 </p>
+      </div>
+    </div>
+    <div class="search">
+     <form action="/es" method="post" name="searchform" id="searchform">
+        <input name="name" class="input_text" placeholder="请输入关键字" style="color: rgb(153, 153, 153);" type="text">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+    <div class="paihang">
+      <h2 class="ab_title"><a href="/">站长推荐</a></h2>
+      <ul>
+      	<#list (headartlist)! as headartlist>
+        <li><b><a href="/listView/${(headartlist.articleId)!}" target="_blank">${(headartlist.articleTitle)!}</a></b>
+          <p>
+            <#if headartlist.articleContent?length gt 200>
+            	${headartlist.articleContent?substring(0,100)}
+            	<#else>
+            		${(headartlist.articleContent)!}
+            </#if>
+            </p>
+        </li>
+   		</#list>
+      </ul>
+      <div class="ad"><img src="front/picture/ad300x100.jpg"></div>
+    </div>
+
+
+  </div>
+</article>
+<footer>
+  <p>枫殇残雪<a href="http://localhost:8888/index">个人博客</a></p>
+</footer>
+</body>
+</html>

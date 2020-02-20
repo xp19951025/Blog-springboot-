@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${(artDate.articleTitle)!}</title>
+<!-- <meta name="keywords" content="帝国cms" /> -->
+<meta name="description" content="${(artDate.articleTitle)!}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="/front/css/base.css" rel="stylesheet">
+<link href="/front/css/index.css" rel="stylesheet">
+
+</head>
+<body>
+
+<header>
+
+  <nav>
+    <ul>
+      <li><a href="/index">网站首页</a></li>
+      <#list (catelist)! as catelist>
+      <li><a href="/listcat?page=1&categoryId=${(catelist.categoryId)!}">${(catelist.categoryName)!}</a></li>
+      </#list>
+      <li><a href="/loadmeassage">留言</a></li>
+    </ul>
+  </nav>
+</header>
+<article>
+  <div class="leftbox">
+    <div class="infos">
+      <div class="newsview">
+        <h2 class="intitle">您现在的位置是：<a href="/index">首页</a>&nbsp;>&nbsp;<a href="/jstt/">${(artDate.categoryName)!}</a>&nbsp;</h2>
+        <h3 class="news_title">${(artDate.articleTitle)!}</h3>
+        <div class="news_author"><span class="au01"></span><span class="au02">${(artDate.articleTime?string('yyyy-MM-dd'))!}</span></div>
+        <div class="tags">作者:<a href="/" target="_blank">${(selectwriter.userName)!}</a></div>
+        <div class="news_about"><strong>简介</strong>
+        	<#if artDate.articleContent?length gt 50>
+            	${artDate.articleContent?substring(0,50)}
+            	<#else>
+            		${(artDate.articleContent)!}
+            </#if>
+        </div>
+        <div class="news_infos">
+		    ${(artDate.articleContent)!}
+        </div>
+      </div>
+    </div>
+    <div class="nextinfo">
+      <p>上一篇：<a href='/listView/${(upart.articleId)!}'>
+      		<#if (upart.articleTitle)! != 'null'>
+            	${(upart.articleTitle)!}
+            </#if>
+            </a>
+      </p>
+      <p>下一篇：
+      	 <a href='/listView/${(downart.articleId)!}'>
+      		<#if (upart.articleTitle)! != 'null'>
+            	${(downart.articleTitle)!}
+            </#if>
+     	 </a>
+      </p>
+    </div>
+
+  </div>
+  <div class="rightbox">
+    <div class="search">
+      <form action="/es" method="post" name="searchform" id="searchform">
+        <input name="name" class="input_text" placeholder="请输入关键字" style="color: rgb(153, 153, 153);" type="text">
+        <input name="Submit" class="input_submit" value="搜索" type="submit">
+      </form>
+    </div>
+
+    <div class="paihang">
+      <h2 class="ab_title"><a href="/">站长推荐</a></h2>
+      <ul>
+        <#list (headartlist)! as headartlist>
+        <li><b><a href="/listView/${(headartlist.articleId)!}" target="_blank">${(headartlist.articleTitle)!}</a></b>
+          <p>
+            <#if headartlist.articleContent?length gt 200>
+            	${headartlist.articleContent?substring(0,100)}
+            	<#else>
+            		${(headartlist.articleContent)!}
+            </#if>
+            </p>
+        </li>
+   		</#list>
+      </ul>
+      <div class="ad"><img src="/front/picture/ad01.jpg"></div>
+    </div>
+
+  </div>
+</article>
+<footer>
+  <p>枫殇残雪<a href="http://localhost:8888/index">个人博客</a></p>
+</footer><script src="static/js/61a9ee23bfbe484da195456aea8b6f8b.js"></script></body>
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script src="/admin/js/jquery-2.1.4.min.js"></script>
+<script src="/layer/layer.js"></script>
+</head>
+<body class="user-select" style="margin: 0px;padding: 0px;">
+	<script type="text/javascript">
+		layer.alert('${(info)!}',function(index){
+			location.href = "/back/category/list";
+			layer.close(index);
+		})
+	</script>
+</body>
+</html>
